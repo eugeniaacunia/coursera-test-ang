@@ -10,10 +10,11 @@ angular.module('NarrowItDownApp', [])
 function FoundItemsDirective (){
   var ddo = {
     restrict: 'E',
-    templateUrl:'foundItems.html',
+    templateUrl: 'foundItems.html',
     scope : {
       found: '<',
-      onRemove: '&'
+      onRemove: '&',
+      errorMessage: '<'
     }
   };
   return ddo;
@@ -32,7 +33,7 @@ function NarrowItDownController (MenuSearchService){
 
     // if the searchTerm is empty, report a error message
     if (menu.searchTerm === '' || menu.searchTerm === ' '){
-      menu.errorMessage = 'Nothing Found';
+      menu.errorMessage = MenuSearchService.getErrorMessage();
     }
     else {
       var promise = MenuSearchService.getMatchedMenuItems(menu.searchTerm);
@@ -40,7 +41,7 @@ function NarrowItDownController (MenuSearchService){
         menu.found = response;
         })
         .catch (function(error){
-            menu.errorMessage = 'Nothing Found';
+            menu.errorMessage = MenuSearchService.getErrorMessage();
         });
       };
   }; //end menu.processSearchTerm
@@ -55,6 +56,8 @@ MenuSearchService.$inject = ['$http'];
 function MenuSearchService($http, searchTerm) {
   var service = this;
   var foundItems = [];
+  var errorMessage = 'Nothing Found';
+
 
   // That method will be responsible for reaching out to the server (using
   // the $http service) to retrieve the list of all the menu items. Once it
@@ -88,5 +91,8 @@ function MenuSearchService($http, searchTerm) {
     foundItems.splice(itemIndex,1);
   };
 
+  service.getErrorMessage = function(){
+    return errorMessage;
+  }
 }
 })();
