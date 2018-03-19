@@ -1,0 +1,8 @@
+<ol>
+  <li ng-repeat= "item in found">
+    <br>
+    Name: {{item.name}}, Short name: {{item.short_name}}, Description : {{item.description}}
+    <button ng-click="onRemove({index: $index});">Don't want this one!</button>
+  </li>
+</ol>
+<div class="error" ng-if="menu.errorMessage">{{menu.errorMessage}}</div>
