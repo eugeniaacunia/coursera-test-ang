@@ -1,0 +1,120 @@
+ <!-- <div ng-controller="RegistrationController as reg"> -->
+ <div class="container">
+  <fieldset>
+    <legend><h2 style="color: #fff" class="text-left">Registration</h2></legend>
+    <!-- regForm-> se refiere a la registration de la forma
+     novalidate -> permite a Angulasjs, la validacion de la forma -->
+     <!-- regForm = es A controller placed on the $scope with a label of 'regForm'. -->
+    <form name='regForm' novalidate>
+
+      First Name:
+      <br>
+    <!-- reg.user.username -> sig que todos los elementos del obj user (user.username)
+    sean atachados a la instancia del controller (reg) -->
+    <!-- ESte campo es obligatori2 y espera como min 4 ch y como max 10, y luego
+    se interpola con   {{ reg.user.username }} -->
+
+      <input type="text" name="firstname" placeholder="Pick a first name"
+        ng-model="signUpCtrl.user.firstname"
+        required
+        minlength="4"
+        ng-maxlength="15">
+        <!-- {{ signUpCtrl.user.firstname }} -->
+
+        <!-- se valida el ingreso del username
+        (regForm.username.$error.minlength, aquie regForm es la formulario
+        username, es el nombre del input anterior, y minlength es el atributo
+        o propiedad declarado en el input Username
+        $touched sig que se ha dado clic en el input. si el resulado es true
+        entonces se muestra el mensaje -->
+        <span
+          ng-if="(regForm.firstname.$error.minlength || regForm.firstname.$error.required) && regForm.username.$touched">
+          First name must be at least 4 characters long
+        </span>
+        <span ng-if="regForm.firstname.$error.maxlength && regForm.firstname.$touched">
+          First name must not be longer than 15 characters
+        </span>
+        <br>
+
+        Last Name:
+        <br>
+
+        <input type="text" name="lastname" placeholder="Pick a last name"
+          ng-model="signUpCtrl.user.lastname"
+          required
+          minlength="4"
+          ng-maxlength="15">
+          <!-- {{ signUpCtrl.user.lastname }} -->
+
+          <!-- se valida el ingreso del username
+          (regForm.username.$error.minlength, aquie regForm es la formulario
+          username, es el nombre del input anterior, y minlength es el atributo
+          o propiedad declarado en el input Username
+          $touched sig que se ha dado clic en el input. si el resulado es true
+          entonces se muestra el mensaje -->
+          <span
+            ng-if="(regForm.lastname.$error.minlength || regForm.lastname.$error.required) && regForm.username.$touched">
+            Last name must be at least 4 characters long
+          </span>
+          <span ng-if="regForm.lastname.$error.maxlength && regForm.lastname.$touched">
+            Last name must not be longer than 15 characters
+          </span>
+          <br>
+
+          Email :
+          <br>
+      <input type="email" name="email" placeholder="Email"
+        ng-model="signUpCtrl.user.email"
+        required>
+        <!-- el tipo input=email, espera recibir un domain está implicito.
+        la propiedad $invalid está implicita en este input y signfica
+        que si lo ingresa es invalido y si en el input se ha dado click
+        entonce se muestra el error -->
+        <span ng-if="regForm.email.$invalid && regForm.email.$touched">
+          Must be a valid email address: handle@domain format
+        </span>
+        <br>
+<!--
+      para este input se define un patron "(\d{3})-(\d{3})-(\d{4})"
+      se espera 3 digitos - 3 digitos - 4 digitos -->
+      Phone Number:
+      <br>
+      <input type="text" name="phone" placeholder="Phone ###-###-####"
+        ng-model="signUpCtrl.user.phone"
+        pattern="(\d{3})-(\d{3})-(\d{4})">
+        <span ng-if="regForm.phone.$invalid && regForm.phone.$touched">
+          Phone must be in the format ###-###-####.
+        </span>
+        <br>
+
+        Number Favorite Dish:
+        <br>
+        <input type="text" name="numdish" placeholder="Pick a number of favorite dish"
+          ng-model="signUpCtrl.user.numdish"
+          required
+          minlength="1"
+          ng-maxlength="2">
+          <!-- {{ signUpCtrl.user.numdish }} -->
+          <span id="info" ng-if="signUpCtrl.errMessage">
+            No such menu number exists
+          </span>
+          <br><br>
+
+      <button
+        ng-disabled="regForm.$invalid"
+        ng-click="signUpCtrl.submit()" style="color:#000">Submit</button>
+
+        <span id="info" ng-if="signUpCtrl.saveDataMessage">
+          Your information has been saved
+        </span>
+
+        <!-- <div style="margin-top: 10px;">
+          Form valid? {{ regForm.$valid }}
+        </div> -->
+    </form>
+  </fieldset>
+  <!-- <div id="info" ng-if="signUpCtrl.ShowSaveMessage">
+    Your information has been saved
+  </div> -->
+
+</div>

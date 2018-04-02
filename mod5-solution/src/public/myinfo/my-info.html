@@ -1,0 +1,31 @@
+<div class="container">
+  <h2>My Information </h2>
+  <div ng-if="!myInfoCtrl.preferenceMenu">
+     <br>
+     Not Signed Up Yet.<a ui-sref="public.signup"> Sign up Now!</a>
+     <br>
+  </div>
+
+  <div ng-if="myInfoCtrl.preferenceMenu">
+      <h3>First Name:</h3>
+      {{myInfoCtrl.preferenceMenu.user.firstname}}
+      <br>
+      <h3>Last Name:</h3>
+      {{myInfoCtrl.preferenceMenu.user.lastname}}
+      <br>
+      <h3>Email:</h3>
+      {{myInfoCtrl.preferenceMenu.user.email}}
+      <br>
+      <h3>Phone:</h3>
+      {{myInfoCtrl.preferenceMenu.user.phone}}
+      <br>
+      <h3>Favorite Dish:</h3>
+      Name: {{myInfoCtrl.preferenceMenu.name}}
+      <br>
+      Description: {{myInfoCtrl.preferenceMenu.description}}
+      <br>
+
+      <img with="200" height="200" ng-src="{{myInfoCtrl.preferenceMenu.path}}" alt="{{myInfoCtrl.preferenceMenu.name}}">
+
+  </div>
+</div>
